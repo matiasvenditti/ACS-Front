@@ -2,49 +2,6 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-mat-form-field{
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-form{
-    position: absolute;
-    border-radius: 5px;
-}
-
-@media only screen and (min-width: 300px) {
-    form {
-        width: 100%;
-    }
-}
-
-@media only screen and (min-width: 400px){
-    form{
-        width: 50%;
-        padding: 40px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    
-    
-        -moz-box-shadow: 0 0 5px #888;
-        -webkit-box-shadow: 0 0 5px#888;
-        box-shadow: 0 0 10px #888;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-    form {
-        width: 25%;
-    }
-}
-
-.submit {
-    width: 100%;
-}
-
 .title{
     display: block;
     width: 100%;
