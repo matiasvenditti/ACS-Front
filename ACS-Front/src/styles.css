@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
 form{
     position: absolute;
     border-radius: 5px;
@@ -42,4 +46,11 @@ mat-form-field{
     form {
         width: 25%;
     }
+}
+
+.title{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 20px 0;
 }
