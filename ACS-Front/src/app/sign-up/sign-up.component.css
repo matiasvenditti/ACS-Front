@@ -1,3 +1,7 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
 mat-form-field{
     display: block;
     width: 100%;
@@ -39,5 +43,12 @@ form{
 
 .submit {
     width: 100%;
+}
+
+.title{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 20px 0;
 }
 
