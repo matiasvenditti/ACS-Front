@@ -27,8 +27,9 @@ export class SignUpComponent implements OnInit {
 
   submit() {
     const user: User = new User(this.form.value.name, this.form.value.surname, this.form.value.username, this.form.value.password);
-    console.log(user);
-    this.userService.createUser(user).subscribe();
+    this.userService.createUser(user).subscribe(res => {
+      console.log(res);
+    });
   }
 
   checkPasswords(passwordKey: string, confirmationKey: string) {
