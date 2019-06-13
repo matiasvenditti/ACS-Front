@@ -2,12 +2,28 @@
 <form [formGroup]="form">
   <h3 class="title">Create Account</h3>
   <mat-form-field>
-    <input matInput placeholder="Username" type="text" formControlName="username">
+    <input matInput
+           placeholder="Username"
+           type="text"
+           formControlName="username"
+           data-cy="username-input">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Password" type="password" formControlName="password">
+    <input matInput
+           placeholder="Password"
+           type="password"
+           formControlName="password"
+           data-cy="password-input">
   </mat-form-field>
 
-  <button mat-raised-button color="primary" class="submit" [disabled]="form.invalid" type="submit" (click)="login()">Login</button>
+  <button mat-raised-button
+          color="primary"
+          class="submit"
+          data-cy="submit-button"
+          [disabled]="form.invalid"
+          type="submit"
+          (click)="login()">
+    Login
+  </button>
 </form>

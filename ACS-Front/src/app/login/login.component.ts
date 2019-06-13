@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     this.form = this.fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required]
-    })
+    });
   }
 
   ngOnInit() {
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.logIn();
-    this.router.navigate(['/register'])
+    this.router.navigate(['/register']);
   }
 
 }

@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
       username: [null, Validators.required],
       password: [null, Validators.required],
       confirm: [null, Validators.required]
-    }, {validator: this.checkPasswords('password', 'confirm')})
+    }, {validator: this.checkPasswords('password', 'confirm')});
   }
 
   ngOnInit() {
@@ -34,14 +34,14 @@ export class SignUpComponent implements OnInit {
 
   checkPasswords(passwordKey: string, confirmationKey: string) {
     return (group: FormGroup) => {
-      let passwordInput = group.controls[passwordKey]
-      let passwordConfirmationInput = group.controls[confirmationKey]
-      if (passwordInput.value !== passwordConfirmationInput.value){
-        return passwordConfirmationInput.setErrors({nonEquivalent: true})
+      const passwordInput = group.controls[passwordKey];
+      const passwordConfirmationInput = group.controls[confirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({nonEquivalent: true});
       } else {
-        return passwordConfirmationInput.setErrors(null)
+        return passwordConfirmationInput.setErrors(null);
       }
-    }
+    };
   }
 
 }
