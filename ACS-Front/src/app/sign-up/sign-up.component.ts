@@ -11,6 +11,8 @@ import { UserService } from '../services/user.service';
 export class SignUpComponent implements OnInit {
 
   form: FormGroup;
+  hide = true;
+  hide1 = true;
 
   constructor(private fb: FormBuilder, private userService: UserService) {
     this.form = this.fb.group({

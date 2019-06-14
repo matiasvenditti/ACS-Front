@@ -1,24 +1,56 @@
 <form [formGroup]="form">
   <h3 class="title">Create Account</h3>
   <mat-form-field>
-    <input matInput placeholder="Name" type="text" formControlName="name">
+    <input matInput
+           placeholder="Name"
+           type="text"
+           formControlName="name"
+           data-cy="name-input">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Surname" type="text" formControlName="surname">
+    <input matInput
+           placeholder="Surname"
+           type="text"
+           formControlName="surname"
+           data-cy="surname-input">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Username" type="text" formControlName="username">
+    <input matInput
+           placeholder="Username"
+           type="text"
+           formControlName="username"
+           data-cy="username-input">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Password" type="password" formControlName="password">
+    <input matInput
+           placeholder="Password"
+           [type]="hide ? 'password' : 'text'"
+           formControlName="password"
+           data-cy="password-input">
+    <mat-icon matSuffix data-cy="show-pass" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Confirm Password" type="password" formControlName="confirm">
+    <input matInput
+           placeholder="Confirm Password"
+           [type]="hide1 ? 'password' : 'text'"
+           formControlName="confirm"
+           data-cy="confirm-pass-input">
+    <mat-icon matSuffix data-cy="show-confirm" (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" class="submit" [disabled]="form.invalid" type="submit" (click)="submit()">Register</button>
+  <button mat-raised-button
+          color="primary"
+          class="submit"
+          [disabled]="form.invalid"
+          type="submit"
+          (click)="submit()"
+          data-cy="submit-button">
+    Register
+  </button>
 </form>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

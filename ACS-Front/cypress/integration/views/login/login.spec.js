@@ -1,11 +1,11 @@
-context('Local Storage', () => {
-  beforeEach(() => {
-    cy.visit('/login')
+context('Login', () => {
+  before(() => {
+    cy.visit('/login');
   });
 
   it('should login a user', () => {
 
-    cy.clearLocalStorage().should((ls) => {
+    cy.clearLocalStorage().should(ls => {
       expect(ls.getItem('token')).to.be.null;
     });
 
