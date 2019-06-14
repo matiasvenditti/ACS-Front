@@ -16,7 +16,7 @@ describe('Register', () => {
     cy.wait(500);
   });
 
-  beforeEach(() => {
+  afterEach(() => {
 
     cy.get('[data-cy=name-input]').clear();
 
@@ -48,9 +48,6 @@ describe('Register', () => {
 
   it('should register a valid user', () => {
 
-    cy.server();
-    cy.route('POST', '/v1/customers', { name: name, surname: surname, username: username, password: pass }).as('createUser');
-
     cy.get('[data-cy=name-input]').click().type(name, {delay: 100});
 
     cy.get('[data-cy=surname-input]').click().type(surname, {delay: 100});
@@ -63,23 +60,12 @@ describe('Register', () => {
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 200);
+    cy.wait(500);
+
+    cy.contains('User has been registered');
   });
 
   it('should not register a user with a name not between 2 and 20 characters', () => {
-
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/v1/customers',
-      status: 400,
-      response: {
-        name: name.substring(0,1),
-        surname: surname,
-        username: username,
-        password: pass
-      }
-    }).as('createUser');
 
     cy.get('[data-cy=name-input]').click().type(name.substring(0,1), {delay: 100});
 
@@ -93,23 +79,12 @@ describe('Register', () => {
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 400);
+    cy.wait(500);
+
+    cy.contains('Invalid data');
   });
 
   it('should not register a user with a surname not between 2 and 20 characters', () => {
-
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/v1/customers',
-      status: 400,
-      response: {
-        name: name,
-        surname: surname.substring(0,1),
-        username: username,
-        password: pass
-      }
-    }).as('createUser');
 
     cy.get('[data-cy=name-input]').click().type(name, {delay: 100});
 
@@ -123,23 +98,12 @@ describe('Register', () => {
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 400);
+    cy.wait(500);
+
+    cy.contains('Invalid data');
   });
 
   it('should not register a user with a username not between 5 and 32 characters', () => {
-
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/v1/customers',
-      status: 400,
-      response: {
-        name: name,
-        surname: surname,
-        username: username.substring(0,3),
-        password: pass
-      }
-    }).as('createUser');
 
     cy.get('[data-cy=name-input]').click().type(name, {delay: 100});
 
@@ -153,23 +117,12 @@ describe('Register', () => {
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 400);
+    cy.wait(500);
+
+    cy.contains('Invalid data');
   });
 
   it('should not register a user with a username with special characters', () => {
-
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/v1/customers',
-      status: 400,
-      response: {
-        name: name,
-        surname: surname,
-        username: username + '$',
-        password: pass
-      }
-    }).as('createUser');
 
     cy.get('[data-cy=name-input]').click().type(name, {delay: 100});
 
@@ -183,23 +136,12 @@ describe('Register', () => {
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 400);
+    cy.wait(500);
+
+    cy.contains('Invalid data');
   });
 
   it('should not register a user with a password with less than 8 characters', () => {
-
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/v1/customers',
-      status: 400,
-      response: {
-        name: name,
-        surname: surname,
-        username: username,
-        password: 'Pass1'
-      }
-    }).as('createUser');
 
     cy.get('[data-cy=name-input]').click().type(name, {delay: 100});
 
@@ -217,23 +159,12 @@ describe('Register', () => {
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 400);
+    cy.wait(500);
+
+    cy.contains('Invalid data');
   });
 
   it('should not register a user with a password that does not have one upperCase and one number', () => {
-
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/v1/customers',
-      status: 400,
-      response: {
-        name: name,
-        surname: surname,
-        username: username,
-        password: 'password'
-      }
-    }).as('createUser');
 
     cy.get('[data-cy=name-input]').click().type(name, {delay: 100});
 
@@ -241,16 +172,14 @@ describe('Register', () => {
 
     cy.get('[data-cy=username-input]').click().type(username, {delay: 100});
 
-    cy.get('[data-cy=show-pass]').click();
-
     cy.get('[data-cy=password-input]').click().type('password', {delay: 100});
-
-    cy.get('[data-cy=show-confirm]').click();
 
     cy.get('[data-cy=confirm-pass-input]').click().type('password', {delay: 100});
 
     cy.get('[data-cy=submit-button]').click();
 
-    cy.wait('@createUser').its('status').should('eq', 400);
+    cy.wait(500);
+
+    cy.contains('Invalid data');
   });
 });

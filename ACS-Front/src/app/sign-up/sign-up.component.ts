@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,7 @@ export class SignUpComponent implements OnInit {
   hide = true;
   hide1 = true;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private snackbar: MatSnackBar) {
     this.form = this.fb.group({
       name: [null, Validators.required],
       surname: [null, Validators.required],
@@ -29,8 +30,13 @@ export class SignUpComponent implements OnInit {
 
   submit() {
     const user: User = new User(this.form.value.name, this.form.value.surname, this.form.value.username, this.form.value.password);
-    this.userService.createUser(user).subscribe(res => {
-      console.log(res);
+    this.userService.createUser(user).subscribe(success => {
+      if (success) {
+        this.openSnackbar('User has been registered');
+      } else {
+        this.openSnackbar('Invalid data');
+      }
+      console.log(success);
     });
   }
 
@@ -46,4 +52,10 @@ export class SignUpComponent implements OnInit {
     };
   }
 
+  private openSnackbar(message: string, ms?: number) {
+    this.snackbar.open(message, 'X', {
+      duration: ms || 3000,
+      verticalPosition: 'top'
+    });
+  }
 }
